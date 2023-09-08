@@ -104,7 +104,7 @@ static char *process_path(struct allocator *a, char *result, size_t *nresultp,
         D(("result[1] -> '%s'", result));
         /* If we're following symlinks, see if the path so far points to a
          * link */
-        if(flags & RP_READLINK) {
+        if(0) {
           const char *const target = sftp_do_readlink(a, result);
 
           if(target) {

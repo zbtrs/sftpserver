@@ -704,10 +704,11 @@ uint32_t sftp_vany_read(struct sftpjob *job) {
   sftp_send_uint8(job->worker, SSH_FXP_DATA);
   sftp_send_uint32(job->worker, job->id);
   sftp_send_need(job->worker, len + 4);
-  if(flags & (HANDLE_TEXT | HANDLE_APPEND))
-    n = read(fd, job->worker->buffer + job->worker->bufused + 4, len);
-  else
-    n = pread(fd, job->worker->buffer + job->worker->bufused + 4, len, offset);
+  // if(flags & (HANDLE_TEXT | HANDLE_APPEND))
+  // lseek(fd,offset,SEEK_SET);
+  n = read(fd, job->worker->buffer + job->worker->bufused + 4, len);
+  // else
+  //   n = pread(fd, job->worker->buffer + job->worker->bufused + 4, len, offset);
   /* Short reads are allowed so we don't try to read more */
   if(n > 0) {
     /* Fix up the buffer */
@@ -745,10 +746,11 @@ uint32_t sftp_vany_write(struct sftpjob *job) {
     return rc;
   while(len > 0) {
     /* Short writes aren't allowed so we loop around writing more */
-    if(flags & (HANDLE_TEXT | HANDLE_APPEND))
-      n = write(fd, job->ptr, len);
-    else
-      n = pwrite(fd, job->ptr, len, offset);
+    // if(flags & (HANDLE_TEXT | HANDLE_APPEND))
+    //   n = write(fd, job->ptr, len);
+    // else
+    //   n = pwrite(fd, job->ptr, len, offset);
+    n = write(fd, job->ptr, len);
     if(n < 0)
       return HANDLER_ERRNO;
     job->ptr += n;

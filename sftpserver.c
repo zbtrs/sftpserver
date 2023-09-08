@@ -435,7 +435,7 @@ int main(int argc, char **argv) {
   hints.ai_family = PF_UNSPEC;
   hints.ai_socktype = SOCK_STREAM;
 #endif
-
+  // sftp_debugging = 1;
   /* Find basename of executable */
   if(!(bn = strrchr(argv[0], '/')))
     bn = argv[0];

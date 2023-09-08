@@ -1,14 +1,7 @@
 TAGS
-Makefile
 .deps
 aclocal.m4
 autom4te.cache
-config.cache
-config.aux
-config.h
-config.h.in
-config.status
-configure
 ktrace.ouut
 ktrace.out
 sftpserver
